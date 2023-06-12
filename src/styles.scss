@@ -1,1 +1,1731 @@
-/* You can add global styles to this file, and also import other style files */
+@use "sass:math";
+
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+$fonts: Roboto, "Helvetica Neue", sans-serif;
+$font-size: 1rem;
+$light: rgb(250, 250, 250);
+$grey: rgb(188, 188, 188);
+$dark: rgb(51, 51, 51);
+$blue1: rgb(15, 105, 170);
+$blue1-hover: rgb(51, 128, 183);
+$blue2: rgb(236, 240, 249);
+$yellow1: rgb(255, 192, 0);
+$yellow2: rgb(255, 234, 178);
+$table-border: #dee2e6;
+$table-bg: #f2f2f2;
+$table-hover: rgb(223, 234, 244);
+$nav-height: 60px;
+$error: rgb(250, 90, 85);
+
+// --------------- General ---------------
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  font-family: $fonts;
+  font-size: 1rem !important;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  min-width: 300px;
+}
+
+.body {
+  max-width: 750px;
+  margin: 0px auto 50px auto;
+  padding: 0 25px;
+}
+
+h1 {
+  color: $blue1;
+  margin: 0px;
+  padding: 50px 0px 25px 0px;
+  font-size: $font-size * 2 !important;
+  white-space: normal;
+}
+
+h2 {
+  color: $blue1;
+  margin: 0px;
+  padding: 50px 0px 25px 0px;
+  font-size: $font-size * 1.5 !important;
+  white-space: normal;
+}
+
+h3 {
+  color: $blue1;
+  margin: 0px;
+  padding: 0px;
+  font-size: $font-size * 1.25 !important;
+  white-space: normal;
+}
+
+table {
+  width: 100%;
+}
+
+i.fa {
+  color: $blue1;
+}
+
+a {
+  color: $blue1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+p,
+a,
+span {
+  font-size: $font-size;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.font-awesome-error {
+  color: $error !important;
+}
+
+.formError,
+.formDocs {
+  max-width: 375px;
+  min-width: 250px;
+}
+
+.error,
+.error p {
+  color: $error !important;
+  text-align: center;
+  font-size: math.div($font-size, 1.2) !important;
+  margin: 0 0 5px;
+}
+
+.mat-hint-is-p {
+  font-size: math.div($font-size, 1.2);
+  margin: 5px 0 0;
+}
+
+.mat-error-is-p {
+  color: $error !important;
+  font-size: math.div($font-size, 1.2);
+  margin: 0;
+}
+
+app-control-messages div {
+  color: $error;
+  text-align: center;
+  font-size: math.div($font-size, 1.2) !important;
+  margin: 5px 0 0;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0 !important;
+}
+
+.no-bottom-space {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.no-top-space {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.no-side-space {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.top-space {
+  padding-top: 50px;
+}
+
+.small-txt {
+  font-size: math.div($font-size, 1.2);
+}
+
+.italic-txt {
+  font-style: italic;
+}
+
+.mat-checkbox-inner-container {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.mat-checkbox-frame {
+  border-width: 1px !important;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  line-height: 25px;
+}
+
+.mat-checkbox-layout {
+  white-space: initial !important;
+  margin-bottom: 0.2rem !important;
+}
+
+code {
+  font-size: $font-size;
+  border: 1px solid $table-border;
+  padding: 5px;
+  background: $light;
+  border-radius: 5px;
+  color: $blue1;
+  line-height: 2.5;
+}
+
+ol,
+li {
+  font-size: $font-size;
+}
+
+ol {
+  padding-inline-start: 1rem;
+}
+
+.tableContainer {
+  overflow-x: scroll;
+  border-radius: 10px;
+}
+
+.fa.fa-close {
+  font-size: $font-size !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.fa-2x {
+  font-size: 1.6em !important;
+}
+
+.fa-3x {
+  font-size: 2em !important;
+}
+
+.color-blue {
+  color: $blue1;
+}
+
+// --------------- Nav Bar ---------------
+
+.navbar-container {
+  display: flex;
+  height: $nav-height;
+  width: 100%;
+  padding: 10px 0;
+  box-shadow: 0 0px 40px rgba(0, 0, 0, 0.1);
+}
+.back-navigation-wrapper,
+.logo-wrapper,
+.login-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-navigation-wrapper,
+.login-status {
+  width: 25%;
+}
+
+.logo-wrapper {
+  width: 50%;
+}
+
+.logo-wrapper .logo {
+  height: 100%;
+  width: 100%;
+  max-height: $nav-height;
+}
+
+.nav-user {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+button.back-navigation i,
+button.hamburger-button i {
+  font-size: $font-size;
+}
+
+button.back-navigation,
+button.hamburger-button {
+  padding: 10px;
+}
+
+div.hamburger-items div.hamburger-content {
+  cursor: pointer;
+  position: absolute;
+  border-radius: 10px;
+  background: $blue2;
+  width: 250px;
+  z-index: 2;
+  top: 25px;
+  right: 0;
+}
+
+div.hamburger-items div.hamburger-content span {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 15px 25px;
+}
+
+div.hamburger-items div.hamburger-content span p {
+  margin: 0;
+}
+
+div.hamburger-items div.hamburger-content span:hover {
+  border-radius: 10px;
+  background: $table-hover;
+}
+
+div.hamburger-items {
+  position: relative;
+  display: inline;
+}
+
+// --------------- Navbar Fixed ---------------
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  background: white;
+  z-index: 3;
+}
+
+body {
+  margin-top: 80px;
+}
+// --------------- Input Fields ---------------
+
+.inputType {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  right: 0;
+}
+
+.input-icon {
+  padding: 0.5em;
+  background: $blue2;
+  border-radius: 0px 5px 5px 0px;
+  margin: 0;
+}
+
+input.dropdown-button {
+  cursor: pointer;
+  display: flex;
+  border-radius: 5px 0px 0px 5px;
+  margin: 0;
+}
+
+div.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.inputForm {
+  max-width: 375px;
+  min-width: 250px;
+}
+
+.input-wrapper {
+  display: flex;
+  position: relative;
+  background: $blue2;
+  border-radius: 5px;
+}
+
+.inputField {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.dailyRangeInputField {
+  width: 100%;
+  position: relative;
+  // background: $blue2;
+  border-radius: 5px;
+  margin-right: 25px;
+  height: fit-content;
+}
+
+.example-full-width {
+  width: 100%;
+  margin-right: 25px;
+}
+
+// .matformDailyRange {
+//   border: none;
+//   align-items: center;
+// }
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  height: 55px !important;
+}
+
+.form-accordion-selfaddable mat-expansion-indicator::after,
+mat-expansion-panel-header-description {
+  color: white !important;
+}
+
+.dailyRangeinput-wrapper {
+  display: flex;
+  position: relative;
+  width: max-content;
+}
+
+.dailyRangeInput {
+  display: inline-flex;
+  margin-right: 25px;
+  position: relative;
+  // height: fit-content;
+  align-items: center;
+}
+
+.add-timerange-icon {
+  width: 100%;
+}
+
+div.dropdown-content {
+  cursor: pointer;
+  position: absolute;
+  border-radius: 10px;
+  background: $blue2;
+  z-index: 1;
+  margin-top: 5px;
+  width: 100%;
+  max-height: 375px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+}
+
+input.dropdown-button.wide {
+  max-width: 100% !important;
+  background: none !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 35px;
+  display: block;
+}
+
+div.dropdown-content p.active {
+  border-radius: 10px;
+  background: $table-hover;
+}
+
+#selectItem div.dropdown-content#multipleItem p.active:before {
+  font-family: FontAwesome !important;
+  content: "\f111" !important;
+  position: absolute;
+  font-size: math.div($font-size, 1.2);
+  color: $blue1;
+  display: block;
+  left: 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+#selectItem div.dropdown-content#multipleItem p:before {
+  font-family: FontAwesome !important;
+  content: "\f10c" !important;
+  position: absolute;
+  font-size: math.div($font-size, 1.2);
+  color: $blue1;
+  display: block;
+  left: 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+#selectItem div.dropdown-content#multipleItem p {
+  position: relative;
+  margin: 0;
+  padding: 10px 25px 10px 50px;
+}
+
+#selectItem div.dropdown-content#singleItem p.active:before {
+  font-family: FontAwesome !important;
+  content: "\f111" !important;
+  position: absolute;
+  font-size: math.div($font-size, 1.2);
+  color: $blue1;
+  display: block;
+  left: 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+#selectItem div.dropdown-content#singleItem p.active {
+  position: relative;
+  margin: 0;
+  padding: 10px 25px 10px 50px;
+}
+
+div.dropdown-content p {
+  position: relative;
+  margin: 0;
+  padding: 10px 25px;
+}
+
+div.dropdown-content p:hover {
+  border-radius: 10px;
+  background: $table-hover;
+}
+
+input {
+  -webkit-appearance: none;
+  height: 2em !important;
+  border: none !important;
+  background: $blue2;
+  border-radius: 5px;
+  font-size: $font-size !important;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  outline: none;
+  text-align: left;
+  padding: 0 5px;
+  margin: 2px 0;
+}
+
+textarea {
+  display: block;
+  font-family: $fonts !important;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  padding: 5px 35px 5px 5px;
+  border: 1px solid $blue2;
+  background: $blue2;
+  border-radius: 5px;
+  font-size: $font-size !important;
+  width: 100%;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  outline: none;
+}
+
+button.sendInput {
+  padding: 5px;
+  margin: 15px 0;
+  border: 2px solid $blue1;
+  background: $blue1;
+  border-radius: 5px;
+  color: $light;
+  cursor: pointer;
+  font-size: $font-size !important;
+}
+
+button.sendInput:disabled {
+  background: $grey;
+  border: 2px solid $grey;
+}
+
+button.sendInput:enabled:hover {
+  border: 2px solid $blue1-hover;
+  background: $blue1-hover;
+}
+
+button.sendInput.secondary {
+  background: none;
+  color: $blue1;
+}
+
+button.sendInput.secondary:disabled {
+  background: none;
+  color: $grey;
+}
+
+button.sendInput.secondary:enabled:hover {
+  border: 2px solid $blue1-hover;
+  background: none;
+  color: $blue1-hover;
+}
+
+.inputInfo {
+  text-align: center;
+  font-size: math.div($font-size, 1.2) !important;
+  margin: 5px 0 0;
+}
+
+.small-form-width {
+  max-width: 250px;
+}
+
+.small-form-width.wide {
+  max-width: 375px;
+}
+
+.inputLabel {
+  color: $blue1;
+  font-size: math.div($font-size, 1.2);
+  margin-bottom: 5px;
+}
+
+.countLabel {
+  color: $blue1;
+  font-size: math.div($font-size, 1.2);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.labelTextarea {
+  padding: 0 5px;
+}
+
+.center-txt {
+  text-align: center;
+}
+
+.mat-select-arrow {
+  color: #0f69aa;
+}
+
+.mat-select-content {
+  background: #ecf0f9;
+}
+
+.mat-checkbox-checked .mat-checkbox-checkmark {
+  background: $blue1 !important;
+}
+
+.file-upload-form {
+  display: flex;
+}
+
+div.loginInput {
+  position: relative;
+}
+
+div.loginInput i {
+  position: absolute;
+  right: 0%;
+  padding: 0.6rem;
+  cursor: pointer;
+}
+
+// --------------- Form Accordion ---------------
+
+.form-accordion mat-expansion-panel {
+  margin: 0 0 15px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.form-accordion mat-expansion-panel-header mat-panel-title {
+  font-weight: bold;
+}
+
+.form-accordion .request mat-expansion-panel-header {
+  background: $blue1 !important;
+}
+
+.form-accordion .response mat-expansion-panel-header,
+.form-accordion .canceled mat-expansion-panel-header {
+  background: $grey !important;
+}
+
+.form-accordion mat-expansion-panel-header span:after,
+.form-accordion mat-expansion-panel-header span mat-panel-title,
+.form-accordion mat-expansion-panel-header span mat-panel-description {
+  color: $light;
+}
+
+.form-accordion mat-panel-description {
+  text-align: right;
+  display: inline !important;
+  font-size: math.div($font-size, 1.2) !important;
+}
+
+.form-accordion .mat-expansion-panel-body {
+  padding: 0;
+  position: relative;
+}
+
+.loadMoreForms {
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+  background: $blue1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.loadMoreForms:hover {
+  background: $blue1-hover;
+}
+
+.circle-space {
+  margin: 0 0.5em;
+  color: white !important;
+  font-size: 0.5em !important;
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr:nth-child(even) {
+  background-color: $table-bg;
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr:nth-child(odd) {
+  background-color: $light;
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr:hover {
+  background-color: $table-hover;
+}
+
+.form-accordion .mat-expansion-panel-body table {
+  border-spacing: 0;
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr td {
+  padding: 15px 25px;
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr td.td-icon {
+  width: 1px; //fix icon padding/margin
+  padding-right: 0;
+}
+
+.form-accordion
+  .mat-expansion-panel-body
+  table
+  tbody
+  tr
+  td.cursor-pointer
+  span {
+  font-size: math.div($font-size, 1.2) !important;
+}
+
+.mat-expansion-indicator:after {
+  color: $light !important;
+}
+
+.emptyOverviewCell,
+.trackingConsentLabel {
+  cursor: pointer;
+}
+
+@media (max-width: 475px) {
+  .form-accordion .mat-expansion-panel-body table tbody tr td.cursor-pointer {
+    display: block !important;
+  }
+}
+
+.form-accordion .mat-expansion-panel-body table tbody tr td.cursor-pointer {
+  cursor: pointer;
+  display: flex;
+}
+
+.form-accordion
+  .mat-expansion-panel-body
+  table
+  tbody
+  tr
+  td.cursor-pointer
+  .table-form-name {
+  width: 100%;
+  padding-right: 15px;
+}
+
+// --------------- Table / Form details ---------------
+
+div.detail-head div {
+  display: block;
+}
+
+table.table-form-detail {
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-form-detail tbody {
+  border-style: hidden;
+}
+
+.table-form-detail th {
+  background-color: $blue1;
+  color: $light;
+  padding: 15px;
+  font-size: $font-size;
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+}
+
+.table-form-detail tr:nth-child(even) {
+  background-color: $table-bg;
+}
+
+.table-form-detail tr:nth-child(odd) {
+  background-color: $light;
+}
+
+.table-form-detail td {
+  text-align: center;
+  padding: 15px;
+  border: 1px solid $table-border;
+  font-size: $font-size;
+}
+
+.file-upload-form p {
+  color: $blue1;
+  font-size: $font-size, 1.2;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// --------------- Form-Finish ---------------
+
+div.fixed-button-form-finish {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  box-shadow: 0 0px 40px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+div.verificationMessage {
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.33) !important;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+div.verificationMessage i {
+  font-size: 2rem;
+  color: $yellow1;
+}
+
+div.verificationMessage p {
+  text-align: left;
+}
+
+// --------------- Form ---------------
+
+app-form-start div div.form div div form div div div.button-wrapper.centered {
+  text-align: right;
+  white-space: nowrap;
+}
+
+app-form-start
+  div
+  div.form
+  div
+  div
+  form
+  div
+  div
+  div.button-wrapper.centered
+  button {
+  width: auto !important;
+}
+
+table input {
+  border: 1px solid $blue1;
+  background: $light;
+}
+
+.question-wrapper,
+.form-hint {
+  font-size: math.div($font-size, 1.2);
+}
+
+div#messageBox div.messageBox *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+div#messageBox div.messageBox *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+div.form-hint.info {
+  overflow-y: scroll;
+  max-height: 85px;
+  position: relative;
+}
+
+div.form-hint.info::-webkit-scrollbar {
+  display: none;
+}
+
+.infoIcon {
+  position: absolute;
+  padding-top: 2px;
+}
+
+.infoText {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.trashButtonContainer {
+  padding-right: 15px !important;
+}
+
+.trashButton {
+  padding: 0.5rem;
+  background: $error;
+  border-radius: 100%;
+  display: flex;
+  width: 1.2rem;
+  height: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.trashButton i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+// --------------- Filter list ---------------
+
+section.filter-list-container {
+  position: absolute;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.filter-list-form {
+  border-radius: 10px;
+  max-height: 375px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  background: $blue2;
+}
+
+.filter-list-form #list .list-option p {
+  border-radius: 10px;
+  margin: 0;
+  padding: 10px 25px;
+}
+
+.filter-list-form #list .list-option p:hover {
+  background: $table-hover;
+  cursor: pointer;
+}
+
+.filter-list-form #list .list-option p.active {
+  background: $table-hover;
+}
+
+// --------------- Datepicker ---------------
+
+my-date-picker *,
+my-date-range-picker * {
+  font-size: $font-size !important;
+  font-family: $fonts !important;
+}
+
+my-date-picker,
+my-date-range-picker {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+my-date-picker div.mydp,
+my-date-picker div.selectiongroup,
+my-date-picker div.selbtngroup,
+my-date-picker button.btnpicker,
+my-date-range-picker div.mydrp,
+my-date-range-picker div.selectiongroup,
+my-date-range-picker div.selbtngroup,
+my-date-range-picker button.btnpicker {
+  border: none !important;
+  border-radius: 5px !important;
+  height: 100% !important;
+  width: 100% !important;
+  display: block !important;
+  background: none !important;
+}
+
+my-date-range-picker div.selectiongroup input {
+  color: transparent !important;
+  font-size: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+my-date-picker span.mydpicon,
+my-date-range-picker span.mydrpicon {
+  display: none !important;
+}
+
+my-date-picker div.selector,
+my-date-range-picker div.selector {
+  width: 100% !important;
+  height: 0 !important;
+  margin-top: 5px !important;
+  margin-left: 0 !important;
+  border: none !important;
+  background: $blue2 !important;
+  z-index: 1 !important;
+  animation: none !important;
+}
+
+my-date-picker table.header,
+my-date-range-picker table.header {
+  height: 50px !important;
+  background: $table-hover !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+my-date-picker .mydp .headerbtn,
+my-date-picker .mydp .headerlabelbtn,
+my-date-picker .mydp .yearchangebtn,
+my-date-picker .mydp .headerbtncell,
+my-date-range-picker .mydrp .headerbtn,
+my-date-range-picker .mydrp .headerlabelbtn,
+my-date-range-picker .mydrp .yearchangebtn,
+my-date-range-picker .mydrp .headerbtncell {
+  background: none !important;
+}
+
+my-date-picker table.caltable,
+my-date-range-picker table.caltable {
+  background: $blue2 !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  margin-bottom: 25px !important;
+}
+
+my-date-picker table.caltable thead tr th,
+my-date-range-picker table.caltable thead tr th {
+  color: $blue1 !important;
+  background: none !important;
+  font-size: math.div($font-size, 1.2) !important;
+}
+
+my-date-picker table.caltable thead tr th,
+my-date-range-picker table.caltable thead tr th {
+  border-bottom: 1px solid $table-hover !important;
+}
+
+my-date-picker table.caltable tbody tr td div.prevmonth,
+my-date-picker table.caltable tbody tr td div.nextmonth,
+my-date-range-picker table.caltable tbody tr td div.prevmonth,
+my-date-range-picker table.caltable tbody tr td div.nextmonth {
+  color: $grey !important;
+}
+
+my-date-picker table.caltable tbody tr td div.currmonth,
+my-date-range-picker table.caltable tbody tr td div.currmonth {
+  color: black !important;
+}
+
+my-date-picker .mydp .currmonth,
+my-date-range-picker .mydrp .currmonth {
+  background: none !important;
+}
+
+my-date-picker table.caltable tbody tr td.selectedday,
+my-date-range-picker table.caltable tbody tr td.daycell.range {
+  background: $blue1 !important;
+  border-radius: 100%;
+}
+
+my-date-picker table.caltable tbody tr td.selectedday span,
+my-date-range-picker table.caltable tbody tr td.daycell.range span {
+  color: white !important;
+}
+
+my-date-picker table td.daycell,
+my-date-range-picker table td.daycell {
+  &:after,
+  &:before {
+    content: "" !important;
+    display: block !important;
+    padding-bottom: calc(50% - 0.5em) !important;
+  }
+  line-height: 1 !important;
+}
+
+my-date-picker .mydp .caltable,
+my-date-picker .mydp .daycell,
+my-date-picker .mydp .monthcell,
+my-date-picker .mydp .monthtable,
+my-date-picker .mydp .weekdaytitle,
+my-date-picker .mydp .yearcell,
+my-date-picker .mydp .yeartable,
+my-date-range-picker .mydrp .caltable,
+my-date-range-picker .mydrp .daycell,
+my-date-range-picker .mydrp .monthcell,
+my-date-range-picker .mydrp .monthtable,
+my-date-range-picker .mydrp .weekdaytitle,
+my-date-range-picker .mydrp .yearcell,
+my-date-range-picker .mydrp .yeartable {
+  border-collapse: separate !important;
+}
+
+my-date-picker .mydp table,
+my-date-range-picker .mydrp table {
+  border-spacing: 5px !important;
+}
+
+my-date-picker table td.daycell div.datevalue,
+my-date-range-picker table td.daycell div.datevalue {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 100% !important;
+}
+
+my-date-picker table td.daycell.disabled,
+my-date-range-picker table td.daycell.disabled {
+  background: none !important;
+  cursor: not-allowed !important;
+}
+
+my-date-picker table td.daycell.disabled div.datevalue,
+my-date-range-picker table td.daycell.disabled div.datevalue {
+  color: $grey !important;
+}
+
+my-date-picker table td.daycell div.datevalue span.markcurrday,
+my-date-range-picker table td.daycell div.datevalue span.markcurrday {
+  font-weight: bold !important;
+  color: $blue1;
+  text-decoration: none !important;
+}
+
+my-date-picker table td.daycell:hover,
+my-date-range-picker table td.daycell:hover {
+  background: $table-hover !important;
+  border-radius: 100% !important;
+}
+
+my-date-picker table td.daycell.disabled:hover,
+my-date-range-picker table td.daycell.disabled:hover {
+  background: none !important;
+}
+
+my-date-picker table td.daycell div span,
+my-date-range-picker table td.daycell div span {
+  vertical-align: unset !important;
+}
+
+my-date-picker .mydp .icon-mydpright:before,
+my-date-range-picker .mydrp .icon-mydrpright:before {
+  font-family: FontAwesome !important;
+  content: "\f105" !important;
+}
+
+my-date-picker .mydp .icon-mydpleft:before,
+my-date-range-picker .mydrp .icon-mydrpleft:before {
+  font-family: FontAwesome !important;
+  content: "\f104" !important;
+}
+
+my-date-picker .mydp .headermonthtxt,
+my-date-picker .mydp .headeryeartxt,
+my-date-range-picker .mydrp .headermonthtxt,
+my-date-range-picker .mydrp .headeryeartxt {
+  width: unset !important;
+  height: unset !important;
+}
+
+my-date-picker .mydp .headerbtnenabled:hover,
+my-date-picker .mydp .monthlabel:hover,
+my-date-picker .mydp .yearchangebtnenabled:hover,
+my-date-picker .mydp .yearlabel:hover,
+my-date-picker .mydp .headerbtn:focus,
+my-date-picker .mydp .monthlabel:focus,
+my-date-picker .mydp .yearchangebtn:focus,
+my-date-picker .mydp .yearlabel:focus,
+my-date-range-picker .mydrp .headerbtnenabled:hover,
+my-date-range-picker .mydrp .monthlabel:hover,
+my-date-range-picker .mydrp .yearchangebtnenabled:hover,
+my-date-range-picker .mydrp .yearlabel:hover,
+my-date-range-picker .mydrp .headerbtn:focus,
+my-date-range-picker .mydrp .monthlabel:focus,
+my-date-range-picker .mydrp .yearchangebtn:focus,
+my-date-range-picker .mydrp .yearlabel:focus {
+  color: unset !important;
+}
+
+my-date-picker .mydp .daycell:focus,
+my-date-picker .mydp .monthcell:focus,
+my-date-picker .mydp .yearcell:focus,
+my-date-range-picker .mydrp .daycell:focus,
+my-date-range-picker .mydrp .monthcell:focus,
+my-date-range-picker .mydrp .yearcell:focus {
+  outline: none !important;
+}
+
+// my-date-picker .mydp .selectedday .datevalue,
+// my-date-picker .mydp .selectedmonth .monthvalue,
+// my-date-picker .mydp .selectedyear .yearvalue,
+// my-date-range-picker .mydrp .range .datevalue,
+// my-date-range-picker .mydrp .selectedmonth .monthvalue,
+// my-date-range-picker .mydrp .selectedyear .yearvalue {
+//     background: none !important;
+// }
+
+my-date-picker .mydp .daycell .datevalue,
+my-date-range-picker .mydrp .daycell .datevalue {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.mydp .selectorarrowleft:before,
+.mydp .selectorarrow:after,
+.mydrp .selectorarrowleft:before,
+.mydrp .selectorarrow:after {
+  display: none !important;
+}
+
+.mydrp .selection {
+  background: none !important;
+  position: absolute !important;
+  min-width: 100% !important;
+}
+
+.mydrp .caltable tbody tr:nth-child(6) td:first-child,
+.mydrp .caltable tbody tr:nth-child(6) td:last-child,
+.mydp .caltable tbody tr:nth-child(6) td:first-child,
+.mydp .caltable tbody tr:nth-child(6) td:last-child {
+  border-radius: 100% !important;
+}
+
+// ---------------- Spinner Component -----------------
+
+.spinner {
+  text-align: center;
+}
+
+.spinner-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 3;
+}
+
+.spinner-container .spinner {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spinner .spinner-message {
+  max-width: 750px;
+  margin: 0px auto 50px auto;
+  padding: 0 25px;
+}
+
+.spinner-container .spinner .loader,
+.spinner-container .spinner .loader:after {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+}
+.spinner-container .spinner .loader {
+  font-size: 6px;
+  border-top: 1em solid $blue2;
+  border-right: 1em solid $blue2;
+  border-bottom: 1em solid $blue2;
+  border-left: 1em solid $blue1;
+  -webkit-animation: spinner 1s infinite linear;
+  animation: spinner 1s infinite linear;
+}
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+// ---------------- Show / Hide Spinner ( + Delay) -----------------
+
+.spinner-container.hideSpinner {
+  visibility: hidden;
+}
+
+.spinner-container.showSpinner {
+  // transition-delay: 0.5s;
+  visibility: visible;
+}
+
+// ---------------- Sign-Up Legal -----------------
+
+footer div#checkbox-container {
+  display: flex;
+  position: relative;
+  margin: 15px 0;
+}
+
+footer div#checkbox-container div#checkbox {
+  position: absolute;
+  top: -4px;
+}
+
+footer div#checkbox-container p.small-txt {
+  margin: 0 0 0 25px;
+}
+
+// ---------------- Error/Message Component -----------------
+
+app-messages .error-container,
+app-messages .message-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 0px;
+  max-width: 500px;
+  min-width: 250px;
+  z-index: 4;
+}
+
+app-messages .message-container {
+  z-index: 2 !important;
+}
+
+app-messages .error-container .error {
+  margin-bottom: 15px;
+  background: $error;
+  border-radius: 5px;
+}
+
+app-messages .message-container .message {
+  margin-bottom: 15px;
+  background: $blue2;
+  border-radius: 5px;
+}
+
+app-messages .error-container .error i {
+  color: $light !important;
+  padding: 15px;
+  cursor: pointer;
+}
+
+app-messages .message-container .message i {
+  color: $blue1 !important;
+  padding: 15px;
+  cursor: pointer;
+}
+
+app-messages .error-container .i-container,
+app-messages .message-container .i-container {
+  width: 100%;
+  text-align: right;
+  border-radius: 5px;
+}
+
+app-messages .error-container .error p {
+  padding: 0px 15px 15px 15px;
+  margin: 0px;
+  color: $light !important;
+  font-size: math.div($font-size, 1.2) !important;
+}
+
+app-messages .message-container .message p {
+  padding: 0px 15px 15px 15px;
+  margin: 0px;
+  font-size: math.div($font-size, 1.2) !important;
+}
+
+app-messages .errorClick {
+  padding: 5px;
+  margin: 0px 0px 15px 0px;
+  border: $light;
+  background: $light;
+  border-radius: 5px;
+  color: $dark;
+  cursor: pointer;
+  font-size: math.div($font-size, 1.2) !important;
+  width: 100%;
+  max-width: 200px;
+}
+
+// ---------------- File Upload -----------------
+
+.neededDocuments {
+  padding: 15px;
+  border-radius: 5px;
+  background: $blue2;
+  margin-bottom: 25px;
+}
+.neededDocuments .disclaimer {
+  margin-top: 15px;
+}
+
+.neededDocuments p {
+  margin: 0;
+  display: inline;
+}
+
+.neededDocuments .documentList {
+  margin-top: 15px;
+}
+
+.file-upload-form a {
+  font-size: $font-size;
+}
+
+// --------------- Question Help Modal ---------------
+.questionHelp {
+  font-size: 100%;
+  cursor: pointer;
+}
+
+.questionHelp:hover i {
+  color: $blue1-hover;
+}
+
+.helpContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.helpModal {
+  background: $blue2;
+  max-width: 750px;
+  min-width: 250px;
+  max-height: 600px;
+  min-height: 250px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  z-index: 4;
+}
+
+.modalContent {
+  padding: 0px 25px 25px 25px;
+}
+
+.modalCloseContainer {
+  width: 100%;
+  text-align: right;
+}
+
+.modalCloseContainer i {
+  color: $blue1 !important;
+  padding: 15px;
+  cursor: pointer;
+}
+
+// --------------- Support Component -----------------
+
+app-support {
+  position: fixed;
+  bottom: 65px;
+  z-index: 2;
+  right: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 0;
+}
+
+app-support div.supportButton {
+  padding: 10px;
+  background: $blue1;
+  border-radius: 100px;
+  height: 20px;
+  width: 20px;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+
+  box-shadow: 0 0 0 0 rgba(15, 105, 170, 0.7);
+  -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  @-webkit-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 15px rgba(15, 105, 170, 0);
+    }
+  }
+  @-moz-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 15px rgba(15, 105, 170, 0);
+    }
+  }
+  @-ms-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 15px rgba(15, 105, 170, 0);
+    }
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 15px rgba(15, 105, 170, 0);
+    }
+  }
+}
+
+app-support div.supportButton.stopAnimation {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  -ms-animation: none;
+  animation: none !important;
+}
+
+app-support div.supportButton i.fa {
+  color: $light;
+  align-items: center;
+  display: flex;
+  font-size: 20px !important;
+}
+
+app-support app-modal .supportComment {
+  background: $light !important;
+  resize: none !important;
+}
+
+app-support app-modal input.dropdown-button.wide {
+  background: $light !important;
+  border-radius: 5px;
+}
+
+app-support app-modal div.inputField.foreground {
+  z-index: 2;
+}
+
+app-support app-modal p.mat-error-is-p {
+  margin-top: 5px;
+}
+
+app-support app-modal div.dropdown-content.short {
+  overflow: unset;
+  max-height: unset;
+}
+
+// app-form-start app-modal div.formStart {
+//     position: relative;
+// }
+
+app-modal input {
+  background: $light;
+  max-width: unset;
+}
+
+// --------------- Box Shadow Elements ---------------
+my-date-picker div.mydp div.selector,
+my-date-range-picker div.mydrp div.selector,
+app-navbar div.hamburger-content,
+app-support div.supportWindow,
+div.dropdown-content,
+div.helpModal,
+app-messages div.error,
+app-messages div.message,
+my-date-picker table.caltable,
+my-date-picker table.header,
+my-date-range-picker table.caltable,
+my-date-range-picker table.header {
+  // box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.33) !important;
+  box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.33) !important;
+}
+
+// --------------- Add Form Feature -------------------
+
+.top-header {
+  display: flex;
+  position: relative;
+}
+
+.top-header h1 {
+  width: 100%;
+}
+
+.top-header .add-form-container {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.top-header .add-form-container .add-form-icon {
+  position: absolute;
+  padding: 5px;
+  cursor: pointer;
+  width: 2.25em;
+  height: 2.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $blue1;
+  border-radius: 100%;
+  border: 0.25em solid white;
+  bottom: -1.85em;
+}
+
+.top-header .add-form-container .add-form-icon i {
+  color: white;
+  font-size: 1.75em !important;
+}
+
+.top-header .add-form-container .add-form-icon:hover {
+  background: $blue1-hover;
+}
+
+// --------------- Mobile optimization ---------------
+
+@media only screen and (max-width: 480px),
+  only screen and (max-device-width: 480px) {
+  h1 {
+    font-size: $font-size * 1.5 !important;
+  }
+
+  h2 {
+    font-size: $font-size * 1.25 !important;
+  }
+
+  h3 {
+    font-size: $font-size * 1.1 !important;
+  }
+  .top-header .add-form-container {
+    position: relative;
+    width: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    display: flex;
+    justify-content: normal;
+    align-self: center;
+    padding: 40px 0px 15px 0px;
+  }
+  .top-header .add-form-container .add-form-icon {
+    position: relative;
+    width: 1.25em;
+    height: 1.25em;
+    bottom: auto;
+  }
+  .top-header .add-form-container .add-form-icon i {
+    color: white;
+    font-size: 1.25em !important;
+  }
+  .helpModal {
+    max-height: 400px;
+  }
+  .trashButton {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 680px),
+  only screen and (max-device-width: 680px) {
+  .form-accordion .mat-expansion-panel-body table tbody tr td {
+    padding: 15px 15px;
+    word-break: break-word;
+  }
+}
+
+fieldset.trackingConsents {
+  max-width: 445px !important;
+}
+
+.mat-checkbox-layout,
+.mat-checkbox-label {
+  line-height: 20px !important;
+  font-size: 0.83333333rem;
+}
+
+.mat-form-field[custom] {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+.mat-select-panel {
+  margin-top: 2.5em;
+}
+
+.mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+
+.mat-option-text.mat-option-text {
+  white-space: normal;
+}
+
+#uploadbtn:hover {
+  background-color: #e1e8fa;
+  cursor: pointer;
+}
+#wrapper {width: 20% !important}
+

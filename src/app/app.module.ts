@@ -3,14 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FitbonusComponent } from './fitbonus/fitbonus.component';
+import {HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FitbonusComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
