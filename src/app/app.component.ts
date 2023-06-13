@@ -70,6 +70,7 @@ export class AppComponent implements OnInit{
     {type:'question',questionid:4 , questionactivate: 'Maßnahmen',optionactivate:'', value:'.age > 16', variable:'answersdate'},
     {type:'question',questionid:5 , questionactivate: 'Maßnahmen-kind',optionactivate:'', value:'.age < 16', variable:'answersdate'},
     {type:'option',questionid:4 , questionactivate: '',optionactivate:'Impfung', value:'.value.includes("test1")', variable:'answerssingle'},
+    {type:'option',questionid:5 , questionactivate: '',optionactivate:'Impfung', value:'.value.includes("test1")', variable:'answerssingle'},
 
     // {questionid:0 , value:'this.alter > 16'},
     // {questionid:0 , value:'this.alter > 16'},
@@ -125,20 +126,11 @@ export class AppComponent implements OnInit{
     this.time.getData().subscribe(data=>{
       this.newdata=data;
     })
-    // this.time.getTestData().subscribe(testdata=>{
-    //   console.log(testdata)
-    //   this.testdata = testdata;
-    //   this.testname = this.testdata.name;
-    // })
   }
 
   ngOnInit(): void {
     this.questionInit();
     for (let i = 0; i < this.question.length; i++) {
-    // console.log(this.checkCondition())
-    // this.checkCondition()
-
-
   }
 }
 
@@ -147,13 +139,7 @@ export class AppComponent implements OnInit{
   }
   
   getcondition(){
-//     // if(this.question[i].condition === 'yes'){
-// // console.log(this.question[i].questionid)
-// console.log(this.condition)
-// // const conditions = this.condition.filter((condition) => condition.questionid === this.question[i].questionid);
-// // return conditions.map((condition) => condition.value);
 return this.condition
-//     // }else{return null}
   }
   
   
@@ -500,42 +486,25 @@ validateBoolean(i:number){
               return answer.value !== valuesingleToRemove;
             });
             
-          
-          console.log(inputElement)
-          console.log(selectedOption);
-          // this.selectedOptions = [selectedOption];
-          console.log(this.selectedOptions);
-          console.log(selectedOption)
-          // await this.getSelectValues(this.selectedOptions);
+
           const newAnswersingle = {
-            id: `${i}`, // Hier solltest du die entsprechende ID einfügen
+            id: `${i}`,
             value: selectedOption.innerText.trim(),
             question: this.question[i].name
-          };
-          console.log(newAnswersingle)
-          
+          };        
           
           this.answerssingle.push(newAnswersingle);
-          console.log(this.allselectederwachsen)
-  
-          // Wert des Eingabefelds setzen
-          // const inputElement = document.getElementById(`input-single-${i}`) as HTMLInputElement;
-          // console.log(inputElement.value)
-          // console.log(this.answerssingle[i].value)
          
           if(inputElement.value && newAnswersingle.value){
             inputElement.value = newAnswersingle.value;
             singleItemElement.style.display = 'none';}
         }else{
-
-          console.log(this.answerssingle);
-          console.log(selectedOption.innerText);
           const newAnswer = {
-            id: `${i}`, // Hier solltest du die entsprechende ID einfügen
+            id: `${i}`,
             value: selectedOption.innerText.trim(),
-            question: this.question[i].name
+            question: this.question[i].name,
+            questionid: this.question[i].questionid,
           };
-          console.log(newAnswer)
           
           this.answerssingle.push(newAnswer);
 
@@ -562,15 +531,7 @@ validatemultiselect(i:number){
   const wholeElement = document.getElementById(`multi${i}`) as HTMLElement
   const optionsmulti = document.getElementsByClassName(`select-option-multi${i}`);
   const alloptions = this.getallquestionoptions(i);
-  console.log(alloptions)
-// this.checkConditions(i, wholeElement, alloptions)
-// this.checkCondition()
 
-
-  // if(this.status=== 0){
-  //   wholeElement.style.display  = 'block';
-  // }
-  // console.log('success2');
 
   if (multiinputElement && multiItemElement) {
     let isMenuOpen = false;
@@ -602,7 +563,6 @@ validatemultiselect(i:number){
               return answervalue !== valueToRemove;
             });
           
-            console.log(this.answersmulti);
             this.answermulti = this.answersmulti.join(", ");
 
     
@@ -614,22 +574,18 @@ validatemultiselect(i:number){
             }
           } else {
             selectedOptionmulti.classList.add("active");
-            console.log(this.answersmulti);
-            console.log(selectedOptionmulti.innerText);
             
             const newAnswer = {
-              id: `${i}`, // Hier solltest du die entsprechende ID einfügen
+              id: `${i}`, 
               value: selectedOptionmulti.innerText.trim(),
-              question: this.question[i].name
+              question: this.question[i].name,
+              questionid: this.question[i].questionid,
             };
-            console.log(newAnswer)
             
             this.answersmulti.push(newAnswer);
             this.answersmultivalue.push(newAnswer.value)
             
             this.answermulti = this.answersmulti.join(", ");
-            console.log(this.answersmulti);
-            console.log(this.answersmultivalue);
     
             const multiinputElement = document.getElementById(`input-multiple-${i}`) as HTMLInputElement;
             if (multiinputElement) {
@@ -658,7 +614,6 @@ validateDate(i: number) {
     geburtsdatum.addEventListener('change', () => {
       try {
         if (this.newdata.status === "OK") {
-          console.log('success');
   
           var splitted = this.newdata.formatted.split(" ", 2);
           var test = geburtsdatum.value.split("-", 4);
@@ -675,21 +630,19 @@ validateDate(i: number) {
   
           if (geburtsdatum.value < minimumdate) {
             this.status = 0;
-            console.log(this.status);
           } else {
             this.status = 1;
-            console.log(this.status);
           }
           
           this.alter = alter;
           const newAnswerdate = {
-            id: `${i}`, // Hier solltest du die entsprechende ID einfügen
+            id: `${i}`,
             value: geburtsdatum.value,
             question: this.question[i].name,
+            questionid: this.question[i].questionid,
             age: alter
           };
   
-          // Suche und aktualisiere die Antwort im Array
           const index = this.answersdate.findIndex(answer => answer.id === newAnswerdate.id);
           if (index !== -1) {
             this.answersdate[index] = newAnswerdate;
@@ -699,10 +652,8 @@ validateDate(i: number) {
   
           this.answersdatevalue.push(newAnswerdate.value);
           this.answerdate = this.answersdate.join(", ");
-          console.log(this.answersdate);
         }
       } catch (error) {
-        // Fallback falls API für Datum ausfällt
         const geburtsdatum = document.getElementById(`dateinput-${i}`) as HTMLInputElement;
         console.log("failed");
         const date = new Date();
@@ -712,7 +663,6 @@ validateDate(i: number) {
         var minimumyear = year - 16;
         var minimumdate = `${minimumyear}-${month}-${day}`;
         var currentDate = `${year}-${month}-${day}`;
-        console.log(currentDate);
   
         if (geburtsdatum.value < minimumdate) {
           this.status = 0;
@@ -748,9 +698,9 @@ validateText(i:number){
             const newAnswertext = {
               id: `${i}`, 
               value: inputElementText.value.trim(),
-              question: this.question[i].name
+              question: this.question[i].name,
+              questionid: this.question[i].questionid,
             };
-            console.log(newAnswertext)
             
             this.answerstext.push(newAnswertext);
             
@@ -768,82 +718,33 @@ validateText(i:number){
   })
   }  
 
-
-  // checkConditions(i:number, wholeElement:HTMLElement, alloptions:any){
-  //   console.log('test')
-  //   console.log(alloptions)
-  //   if (this.getcondition(i)){
-  //     var test = this.getcondition(i);
-  //     console.log(test); 
-  //     if(test){
-  //      for(let p = 0; p < test.length; p++){
-  //      const ifCondition = test[p]
-  //      console.log(ifCondition)
-  //      if (eval(ifCondition)) {
-  //       this.question[i].visible = 'yes'
-  //      }
-  //    }
-  //  }
-  //    }else{wholeElement.style.display = 'none'}
-  // }
-
   evaluateExpression(expression: string) {
     // Verwendung von eval mit this
     const result = eval(expression);
     return result;
   }
-
-
-
 async checkCondition(){
-
-  // const conditions = this.getcondition();
-  // console.log(conditions);
-//   // const example = this;
-// const expression = 'this.value + 5';
-// const result = this.evaluateExpression(expression);
-// console.log(result);
 
   for (let i = 0; i < this.question.length; i++) {
     var x = this.question[i].questionid
     
 
-    // console.log(conditions[i])
     if (this.question[i].condition === 'yes') {
       var test = this.getcondition();
-      // console.log(test)
-      // console.log(i)
+
         for (let p = 0; p < test.length; p++) {
           if(test[p].type === 'question'){
           console.log(x)
           console.log(test[p].questionid)
           if (x === test[p].questionid){
-          const ifCondition: { [key: string]: string } = {};
-            ifCondition[`ifCondition${x}`] = test[p].value;
 
-          // const variable: { [key: string]: string } = {};
-          // variable[`variable${x}`] = test[p].variable;
-          // var formattedvariable = test[p].variable + test[p].value
-          // console.log('this.'+formattedvariable)
-          console.log();
-           
-          // console.log(ifCondition);
-          // console.log(variable);
-          // console.log('found a condition',variable,ifCondition);
-          var self = this; // Variable, die auf das gewünschte 'this'-Objekt verweist
-          var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
+            var self = this;
+            var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
           var variable = 'self.'+test[p].variable+'['+`${0}`+']'
           if(eval(variable)){console.log(eval(variable))
           console.log(formattedCondition);
-          // console.log(eval(formattedCondition));
-          // console.log(this.answersdate[0].age);
           
           if (eval(formattedCondition)) {
-            console.log('bedingung trifft zu');            
-            console.log(this.question[i])
-            console.log(test[p].questionactivate)
-            console.log(this.question.length)
-
             for(let q = 0; q < this.question.length; q++){
               console.log(this.question[q].name)
               console.log( test[p].questionactivate)
@@ -853,12 +754,8 @@ async checkCondition(){
               if(this.question[q].name === test[p].questionactivate){
                 var number = this.question[q].questionid; 
                 var fieldtype = this.question[q].type
-                console.log(`${fieldtype+'-'+number}`)
                 var element = document.getElementById(`${fieldtype+number}`)
-                console.log(element)
-                console.log(number);
                 if(element){
-                  console.log(number);
                   element.style.display = 'block';
                 }else{console.log('process ended but failed, found no element')}
               }else{console.log('process ended but failed, question name doesnt fit', this.question[q].name)}
@@ -870,7 +767,6 @@ async checkCondition(){
       
           }else{
             for(let q = 0; q < this.question.length; q++){
-              // console.log(this.question[q])
               if(this.question[q].name === test[p].questionactivate){
                 var number = this.question[q].questionid; console.log(number);
                 var fieldtype = this.question[q].type
@@ -889,41 +785,28 @@ async checkCondition(){
     
   
   for (let o = 0; o < this.questionoption.length; o++){
-    // console.log(this.questionoption[o].name)
+    
     }
   }
 
   for (let i = 0; i < this.condition.length; i++) {
-    // var x = this.condition[i].questionid
+    
     console.log(i)
     var test = this.getcondition();
-    // console.log(test)
+    
   for(let p = 0; p < test.length; p++){console.log(p)
     if(test[p].type === 'option'){
-  //   console.log(x)
-  //   console.log(test[p].questionid)
 
-
-
-  //   console.log('type option')
-  //   if (x === test[p].questionid){
-  //   const ifCondition: { [key: string]: string } = {};
-  //     ifCondition[`ifCondition${x}`] = test[p].value;
-
-
-  //   console.log();
+      
   var self = this;
 
     var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
     var variable = 'self.'+test[p].variable+'['+`${0}`+']'
     if(eval(variable)){console.log(eval(variable))
-  //   console.log(formattedCondition);
 
     if (eval(formattedCondition)) {
       console.log('bedingung trifft zu');            
-  //     console.log(this.question[i])
-  //     console.log(test[p].optionactivate)
-  //     console.log(this.questionoption.length)
+
 var options: { name: string; pflicht: string; prio: number; questionid: number; visible: string; }[] = [];
 var questionid = test[p].questionid;
 
@@ -933,7 +816,6 @@ this.questionoption
     options.push(option)
   });
 
-console.log(options.length);
     if(options){
       for(let q = 0; q < options.length; q++){
         var type:string='';
@@ -946,18 +828,16 @@ console.log(options.length);
           this.questionoption
               .filter((option) => option.questionid === questionid)  
               .forEach((option, index) => {
-                
-                console.log(option, index);
-                if(option.name === this.questionoption[q].name){number=index}
-                })
+                if(option.name === this.questionoption[q].name){
+                  number=index
+                }
+              })
           
           var questionid = this.questionoption[q].questionid; 
-          var optionname = this.questionoption[q].name
-          console.log(type+'-option-'+questionid+'-'+number)
+          var optionname = this.questionoption[q].name;
 
           var element = document.getElementById(`${type+'-option-'+questionid+'-'+number}`)
           if(element){
-            console.log(number);
             element.style.display = 'block';
           }else{console.log('process ended but failed, found no element')}
         }else{console.log('process ended but failed, questionoption name doesnt fit', this.questionoption[q].name)}
@@ -978,18 +858,11 @@ console.log(options.length);
       options.push(option)
   });
 
-console.log(options.length);
     if(options){
       for(let q = 0; q < options.length; q++){
-        console.log(this.questionoption[q].name)
-        console.log( test[p].optionactivate)
-        console.log(p)
-        console.log(this.questionoption[q].questionid)
-        console.log(this.questionoption[q].prio)
         var type:string='';
         
-
-        if(this.questionoption[q].name === test[p].optionactivate && this.questionoption[q].questionid === test[p].questionid){console.log('fit!!!!!!')
+        if(this.questionoption[q].name === test[p].optionactivate && this.questionoption[q].questionid === test[p].questionid){console.log('fit!!!!!! but in else')
           for(let o = 0; o < this.question.length; o++){if(this.question[o].questionid=== questionid){console.log(this.question[o].type);var type = this.question[o].type;} }
           var number:number = 0;
           
@@ -1002,16 +875,7 @@ console.log(options.length);
           
           var questionid = this.questionoption[q].questionid; 
           var optionname = this.questionoption[q].name
-          // console.log(this.questionoption.length)
-          
-            
-                // console.log(number)
-                
-            
-            // console.log(number)
-          // console.log(`${select-option-${i}-${index}}`)
           var element = document.getElementById(`${type+'-option-'+questionid+'-'+number}`)
-          console.log(element)
           if(element){
               element.style.display = 'none';
           }
@@ -1031,98 +895,22 @@ returnquestion(){
   return question.value 
 }  
   handleClick() {
-    console.log('Button wurde geklickt!');
     this.clicked = true;
   }
   
   handleclickonmultiple() {
-    console.log('Button wurde geklickt!');
     this.clicked = true;
   }
   
   enableclick() {
-    console.log('test123');
     this.clicked = true;
   }
 
 getallquestionoptions(i:number){
   const test = []
   for(let o = 0; o < this.questionoption.length; o++){if(this.questionoption[o].questionid === i) {test.push(this.questionoption[o])}}
-  console.log(test)
   return test
 }
-
-
-
-  // async onSelectionChangeErwachsen(selectElement: HTMLSelectElement) {
-  //   const options = selectElement.options;
-  //   this.selectedOptions = Array.from(options)
-  //     .filter((option: HTMLOptionElement) => option.selected)
-  //     .map((option: HTMLOptionElement) => option.value);
-  //   console.log(this.selectedOptions);
-  //   // await this.getSelectValues(this.selectedOptions);
-  //   this.allselectederwachsen = this.selectedOptions;
-  // }
-
-  async onSelectionChangeErwachsen(selectedOption: string, type:string) {
-    
-    this.selectedOptions = [selectedOption];
-    console.log(this.selectedOptions);
-    console.log(selectedOption)
-    // await this.getSelectValues(this.selectedOptions);
-    this.allselectederwachsen.push(...this.selectedOptions);
-    console.log(this.allselectederwachsen)
-  }
-
-  async onSelectionChange(selectElement: HTMLSelectElement) {
-    const options = selectElement.options;
-
-    console.log(options)
-    this.selectedOptions = Array.from(options)
-      .filter((option: HTMLOptionElement) => option.selected)
-      .map((option: HTMLOptionElement) => option.value);
-      console.log(this.selectedOptions)
-      // await this.getSelectValues(this.selectedOptions);
-      this.allselected = this.selectedOptions;
-
-  }
-  
-
-
-
-
-  // async getSelectValues(option:string[]) {
-  // //   var elementIdserwachsen = ['Impfung','Krebsvorsorge','Zahnvorsorge','Vorsorge-Schwangere','Zahnvorsorge','Checkup35','Private','Zusatzversicherung','Praevention','BMI','Sport','Nichtraucher','Betrieblich'];
-  // //   if(this.geschlecht= 'weiblich'){
-  // //     var elementIdserwachsen = ['Impfung','Krebsvorsorge','Zahnvorsorge','Checkup35','Private','Zusatzversicherung','Praevention','BMI','Sport','Nichtraucher','Betrieblich'];
-  // //   }
-  // //   var elementIdskind = ['Impfung','Untersuchung','Zahnvorsorge','Private','Zusatzversicherung','Praevention','Sport','Babyschwimmen'];
-  //   var result:string[] = option;
-  //   var options = this.optionskind;
-  //   var opt;
-  //   console.log(options)
-  //   console.log(result)
-
-  //   for (var i=0, iLen=options.length; i<iLen; i++) {
-  //     opt = options[i];
-  //     console.log(options[i])
-  //     console.log(result[i])
-
-
-  //   if(this.status === 1){
-  //     console.log(result[i])
-  //     if(result.includes(option[i])){
-  //       console.log(option[i],'success');
-
-
-        
-  //        }
-  //       }
-  //     }
-  //   }
-
-
-
 
   validatePerson() {
     const selectvalue = document.getElementById('für-wen') as HTMLInputElement;
@@ -1130,66 +918,6 @@ getallquestionoptions(i:number){
     this.person = selectvalue.value;
     
   }
-  // test(){
-  //   console.log(this.question[0], this.questionoption[0], this.questionoption[1],)
-  // }
-
-//   defineBonus(){
-  
-//   try {
-//     if(this.newdata.status === "OK"){
-//       const geburtsdatum = document.getElementById('geburtsdatum') as HTMLInputElement;
-      
-
-//       var splitted = this.newdata.formatted.split(" ",2)
-      
-//       var test = geburtsdatum.value.split("-",4)
-
-//       var date = this.newdata.formatted.split("-",4);
-//       var minimumyear = date[0] -16;
-//       var minimumdate = `${minimumyear}-${date[1]}-${date[2]}`;
-//       var minimumdateformatted = minimumdate.split(" ",2);
-      
-//       console.log(minimumdateformatted[0])
-//       this.geburtsdatum = test[0];
-//       console.log(this.geburtsdatum)
-//       // this.geburtsdatum.split("",3)
-//       console.log(date[0])
-//       console.log(this.geburtsdatum)
-//       var alter = date[0] - this.geburtsdatum;
-//       this.alter = alter;
-      
-//       console.log(alter)
-
-//       if(geburtsdatum.value < minimumdate){this.status = 0; console.log(this.status);}else{this.status = 1; console.log(this.status); } 
-      
-
-//   }} catch (error) {
-//     //Fallback falls api für Datum ausfällt
-//     const geburtsdatum = document.getElementById('geburtsdatum') as HTMLInputElement;
-//     console.log("failed")
-//     const date = new Date();
-//     var day = date.getDate();
-//     var month = date.getMonth() + 1;
-//     var year = date.getFullYear();
-//     var minimumyear = year - 16;
-//     var minimumdate = `${minimumyear}-${month}-${day}`
-//     var currentDate = `${year}-${month}-${day}`;
-//     console.log(currentDate)    
-
-//     if(geburtsdatum.value < minimumdate){this.status = 0;}else{this.status = 1;} 
-    
-//   }
-// }
-
-  // validateGeschlecht(){
-  //   var geschlecht = document.getElementById('geschlecht') as HTMLInputElement;
-  //   this.geschlecht = geschlecht.value
-  //   console.log(this.geschlecht)
-  // }
-  
-
-
 
   bmirechner(): any{
     var bmi;
@@ -1212,38 +940,8 @@ getallquestionoptions(i:number){
     this.output= output;
   }
 
-
-  // async setMultipleInput(selectedElement: HTMLElement): Promise<void> {
-  //   if (selectedElement.classList.contains("active")) {
-  //     selectedElement.classList.remove("active");
-  //     this.answers = this.answers.filter((answer) => {
-  //       return answer !== selectedElement.innerText.trim();
-  //     });
-
-  //   } else {
-  //     selectedElement.classList.add("active");
-  //     this.answers.push(selectedElement.innerText.trim());
-    
-  //   }
-  //   this.answer = this.answers.join(", ");
-  //   this.currentInput.nativeElement.value = this.answer;
-  //   console.log(this.answers)
-  // }
-  // async setSingleInput(selectedElement?: HTMLElement): Promise<void> {
-  //   if (selectedElement && selectedElement.parentElement) {
-  //     this.currentInput.nativeElement.value = selectedElement.innerText.trim();
-  //     Array.from(selectedElement.parentElement.children).forEach((element) =>
-  //       element.classList.remove("active")
-  //     );
-  //     selectedElement.classList.add("active");
-  //   }
-  //   this.answer = this.currentInput.nativeElement.value;
-  // }
-
   impfung(){
-
   }
-  
   
   async save(){
     console.log(this.answerssingle)
