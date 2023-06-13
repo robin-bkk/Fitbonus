@@ -84,7 +84,7 @@ export class AppComponent implements OnInit{
     {questionid: 2,name: 'Geschlecht',info:'Bitte wählen Sie Ihr Geschlecht aus:', type:'boolean', options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
     {questionid: 3,name: 'Geburtsdatum',info:'Bitte geben Sie hier Ihr Geburtsdatum ein:', type:'date', options:'n', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
     {questionid: 4,name: 'Maßnahmen',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 16, visible:'no',validation:'n',regex:'',condition:'yes'},
-    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte geben Sie hier Ihr test ein:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'j',regex:'',condition:'yes'}
+    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte geben Sie hier Ihr test ein:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',condition:'yes'}
   ];
 
   questionoption: {name:string, pflicht:string, prio:number, questionid:number, visible:string}[]=[
@@ -740,16 +740,21 @@ async checkCondition(){
 
             var self = this;
             var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
-          var variable = 'self.'+test[p].variable+'['+`${0}`+']'
+          var variable = 'self.'+test[p].variable+'['+`${0}`+']';
+          var variable1 = 'self.'+test[p].variable;
+
+
+
+              
+
+
+            console.log()
+          console.log(eval(variable1))
           if(eval(variable)){console.log(eval(variable))
           console.log(formattedCondition);
           
           if (eval(formattedCondition)) {
             for(let q = 0; q < this.question.length; q++){
-              console.log(this.question[q].name)
-              console.log( test[p].questionactivate)
-              console.log(this.question[q].questionid)
-              console.log(this.question[q].type)
 
               if(this.question[q].name === test[p].questionactivate){
                 var number = this.question[q].questionid; 
