@@ -69,22 +69,17 @@ export class AppComponent implements OnInit{
   condition:{type:string,questionid:number,questionactivate:string,optionactivate:string, value:string,variable:string}[]=[
     {type:'question',questionid:4 , questionactivate: 'Maßnahmen',optionactivate:'', value:'.age > 16', variable:'answersdate'},
     {type:'question',questionid:5 , questionactivate: 'Maßnahmen-kind',optionactivate:'', value:'.age < 16', variable:'answersdate'},
-    {type:'option',questionid:4 , questionactivate: '',optionactivate:'Impfung', value:'.value.includes("test1")', variable:'answerssingle'},
+    {type:'question',questionid:1 , questionactivate: 'Kind',optionactivate:'', value:'.value.includes("Für mein kind")', variable:'answerssingle'},
     {type:'option',questionid:5 , questionactivate: '',optionactivate:'Impfung', value:'.value.includes("test1")', variable:'answerssingle'},
-
-    // {questionid:0 , value:'this.alter > 16'},
-    // {questionid:0 , value:'this.alter > 16'},
-    // {questionid:0 , value:'this.alter > 16'},
-    // {questionid:0 , value:'this.alter > 16'},
+    {type:'question',questionid:2 , questionactivate: 'Geschlecht',optionactivate:'', value:'.value.includes("Impfung")', variable:'answersmulti'},
   ];
-  question: {questionid:number, name:string, info:string, type: string, options:string, pflicht:string, minage:number,visible:string;validation:string;regex:string;condition:string}[]=[
-    {questionid: 0,name: 'Person',info: 'Für wen ist der Antrag?', type: 'boolean',options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
-    {questionid: 1,name: 'pers',info: 'Für wen ist der Antrag?', type: 'boolean',options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
-
-    {questionid: 2,name: 'Geschlecht',info:'Bitte wählen Sie Ihr Geschlecht aus:', type:'boolean', options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
-    {questionid: 3,name: 'Geburtsdatum',info:'Bitte geben Sie hier Ihr Geburtsdatum ein:', type:'date', options:'n', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',condition:'no'},
-    {questionid: 4,name: 'Maßnahmen',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 16, visible:'no',validation:'n',regex:'',condition:'yes'},
-    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte geben Sie hier Ihr test ein:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',condition:'yes'}
+  question: {questionid:number, name:string, info:string, type: string, options:string, pflicht:string, minage:number,visible:string;validation:string;regex:string;placeholder:string;condition:string}[]=[
+    {questionid: 0,name: 'Person',info: 'Für wen ist der Antrag?', type: 'boolean',options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',placeholder:'',condition:'no'},
+    {questionid: 1,name: 'Kind',info: 'Bitte hier den Namen des Kindes eintragen.', type: 'text',options:'n', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'Nachname, Vorname',condition:'yes'},
+    {questionid: 2,name: 'Geschlecht',info:'Bitte wählen Sie Ihr Geschlecht aus:', type:'boolean', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 3,name: 'Geburtsdatum',info:'Bitte geben Sie hier Ihr Geburtsdatum ein:', type:'date', options:'n', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 4,name: 'Maßnahmen',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 16, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte geben Sie hier Ihr test ein:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',placeholder:'',condition:'yes'}
   ];
 
   questionoption: {name:string, pflicht:string, prio:number, questionid:number, visible:string}[]=[
@@ -97,8 +92,8 @@ export class AppComponent implements OnInit{
     {name: 'test4', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
     {name: 'test5', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
     {name: 'test6', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Impfung', pflicht:'j', prio:1,questionid:4, visible: 'no'},
-    {name: 'Impfung', pflicht:'j', prio:1,questionid:5, visible: 'no'},
+    {name: 'Impfung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Impfung', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
     {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
     {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
     {name: 'Vorsorge-Schwangere', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
@@ -118,6 +113,28 @@ export class AppComponent implements OnInit{
     {name: 'Nichtraucher', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
     {name: 'Nichtraucher', pflicht:'j', prio:5,questionid:4, visible: 'yes'},
     {name: 'Betriebliche-Gesundheitsförderung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+  ];
+
+  bonus: {name:string, type:string,}[]=[
+    {name:'Impfung',type:'erwachsen'},
+    {name:'Krebsvorsorge',type:'erwachsen'},
+    {name:'Vorsorge-Schwangere',type:'erwachsen'},
+    {name:'Zahnvorsorge',type:'erwachsen'},
+    {name:'Checkup35',type:'erwachsen'},
+    {name:'Private-Vorsorge',type:'erwachsen'},
+    {name:'Zusatzversicherung',type:'erwachsen'},
+    {name:'Prävention',type:'erwachsen'},
+    {name:'BMI',type:'erwachsen'},
+    {name:'Nichtraucher',type:'erwachsen'},
+    {name:'Betriebliche-Gesundheitsförderung',type:'erwachsen'},
+    {name:'Impfung',type:'kind'},
+    {name:'Zahnvorsorge',type:'kind'},
+    {name:'u-/J-Untersuchungen',type:'kind'},
+    {name:'Private Vorsorge',type:'kind'},
+    {name:'Zusatzversicherung',type:'kind'},
+    {name:'Prävention',type:'kind'},
+    {name:'Sportaktivitäten',type:'kind'},
+    {name:'Babyschwimmen',type:'kind'},
   ];
 
   length:number = this.question.length;
@@ -260,6 +277,7 @@ return this.condition
                      autocomplete="off"
                      class="dropdown-button wide"
                      name="input"
+                     placeholder="${this.question[i].placeholder}"
                    />
                  </div>
                  <span class="inputType"><i class="fa fa-pencil input-icon"></i></span>
@@ -734,24 +752,24 @@ async checkCondition(){
 
         for (let p = 0; p < test.length; p++) {
           if(test[p].type === 'question'){
-          console.log(x)
-          console.log(test[p].questionid)
           if (x === test[p].questionid){
-
-            var self = this;
-            var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
-          var variable = 'self.'+test[p].variable+'['+`${0}`+']';
+          var self = this;
           var variable1 = 'self.'+test[p].variable;
+           console.log('after = question id')
+          if(eval(variable1)){for(let s = -1; s < eval(variable1).length; s++){console.log(s)
 
+            
+            var formattedCondition = 'self.'+test[p].variable+'['+`${s}`+']'+ test[p].value;
+          var variable = 'self.'+test[p].variable+'['+`${s}`+']';
+          
 
-
-              
-
-
-            console.log()
+          console.log(this.answersmulti)
+          console.log(this.answersmultivalue)
+          console.log(eval(variable))       
+          console.log(formattedCondition)
           console.log(eval(variable1))
           if(eval(variable)){console.log(eval(variable))
-          console.log(formattedCondition);
+          console.log(eval(formattedCondition));
           
           if (eval(formattedCondition)) {
             for(let q = 0; q < this.question.length; q++){
@@ -767,7 +785,7 @@ async checkCondition(){
             }
 
            
-           console.log(i)
+
             console.log('process ended')
       
           }else{
@@ -785,7 +803,7 @@ async checkCondition(){
         }
 
         }
-      }
+      }}}
       }}else{console.log('couldnt find a condition',i);}
     
   
@@ -954,12 +972,13 @@ getallquestionoptions(i:number){
     const amswerofinput = this.answerssingle;
     const uploaddata = this.uploadeddata;
     const textanswer = this.answerstext;
-    const age = this.answersdate
+    const age = this.answersdate;
     const test = 'teststorrage';
     this.saveDataToSessionStorage('Antworten multiselect', answerofmultiinput);
     this.saveDataToSessionStorage('Antworten select', amswerofinput);
     this.saveDataToSessionStorage('Antwort textfelder', textanswer);
     this.saveDataToSessionStorage('Geburtsdatum', age);
+
     // await this.getDataFromSessionStorage('test', test)
   }
 
