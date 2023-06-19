@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnInit  } from '@angular/core';
 import {TimeServiceService} from './time-service.service';
-import axios from 'axios';
+import { condition, question, questionoption, bonus } from './data';
+
 
 
 
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit{
   @ViewChild("input")
   currentInput!: ElementRef;
 
-  title = 'entwicklungsapp';
+  title = 'entwicklungsapp'; 
   //singleselect answers
   answersingle: string | null = null;
   answerssingle:  { id: string, value: string, question:string, }[] = [];
@@ -63,81 +64,8 @@ export class AppComponent implements OnInit{
   elementiderwachsen:any;
 
   showelement: boolean=false;
-  // optionserwachsen: string[] = ['Impfung','Krebsvorsorge','Zahnvorsorge','Vorsorge-Schwangere','Zahnvorsorge','Checkup35','Private','Zusatzversicherung','Praevention','BMI','Sport','Nichtraucher','Betrieblich'];
-  // optionskind: string[] = ['Impfung','Untersuchung','Zahnvorsorge','Private','Zusatzversicherung','Praevention','Sport','Babyschwimmen'];
 
-  condition:{type:string,questionid:number,questionactivate:string,optionactivate:string, value:string,variable:string}[]=[
-    {type:'question',questionid:4 , questionactivate: 'Maßnahmen',optionactivate:'', value:'.age > 16', variable:'answersdate'},
-    {type:'question',questionid:5 , questionactivate: 'Maßnahmen-kind',optionactivate:'', value:'.age < 16', variable:'answersdate'},
-    {type:'question',questionid:1 , questionactivate: 'Kind',optionactivate:'', value:'.value.includes("Für mein kind")', variable:'answerssingle'},
-    {type:'option',questionid:5 , questionactivate: '',optionactivate:'Impfung', value:'.value.includes("test1")', variable:'answerssingle'},
-    {type:'question',questionid:2 , questionactivate: 'Geschlecht',optionactivate:'', value:'.value.includes("Impfung")', variable:'answersmulti'},
-  ];
-  question: {questionid:number, name:string, info:string, type: string, options:string, pflicht:string, minage:number,visible:string;validation:string;regex:string;placeholder:string;condition:string}[]=[
-    {questionid: 0,name: 'Person',info: 'Für wen ist der Antrag?', type: 'boolean',options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',placeholder:'',condition:'no'},
-    {questionid: 1,name: 'Kind',info: 'Bitte hier den Namen des Kindes eintragen.', type: 'text',options:'n', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'Nachname, Vorname',condition:'yes'},
-    {questionid: 2,name: 'Geschlecht',info:'Bitte wählen Sie Ihr Geschlecht aus:', type:'boolean', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
-    {questionid: 3,name: 'Geburtsdatum',info:'Bitte geben Sie hier Ihr Geburtsdatum ein:', type:'date', options:'n', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
-    {questionid: 4,name: 'Maßnahmen',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 16, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
-    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte geben Sie hier Ihr test ein:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',placeholder:'',condition:'yes'}
-  ];
-
-  questionoption: {name:string, pflicht:string, prio:number, questionid:number, visible:string}[]=[
-    {name: 'Für mich', pflicht:'j', prio: 1, questionid:0, visible: 'yes'},
-    {name: 'Für mein kind', pflicht:'j', prio: 2, questionid: 0, visible: 'yes'},
-    {name: 'test1', pflicht:'j', prio:1,questionid:1, visible: 'yes'},
-    {name: 'test2', pflicht:'j', prio:1,questionid:1, visible: 'yes'},
-    {name: 'test2', pflicht:'j', prio:1,questionid:6, visible: 'yes'},
-    {name: 'test3', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'test4', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'test5', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'test6', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Impfung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Impfung', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Vorsorge-Schwangere', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Vorsorge-Schwangere', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Zahnvorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Zahnvorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Checkup35', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Checkup35', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Private-Vorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Private-Vorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Zusatzversicherung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Zusatzversicherung', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Prävention', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Prävention', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'BMI', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'BMI', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
-    {name: 'Nichtraucher', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-    {name: 'Nichtraucher', pflicht:'j', prio:5,questionid:4, visible: 'yes'},
-    {name: 'Betriebliche-Gesundheitsförderung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
-  ];
-
-  bonus: {name:string, type:string,}[]=[
-    {name:'Impfung',type:'erwachsen'},
-    {name:'Krebsvorsorge',type:'erwachsen'},
-    {name:'Vorsorge-Schwangere',type:'erwachsen'},
-    {name:'Zahnvorsorge',type:'erwachsen'},
-    {name:'Checkup35',type:'erwachsen'},
-    {name:'Private-Vorsorge',type:'erwachsen'},
-    {name:'Zusatzversicherung',type:'erwachsen'},
-    {name:'Prävention',type:'erwachsen'},
-    {name:'BMI',type:'erwachsen'},
-    {name:'Nichtraucher',type:'erwachsen'},
-    {name:'Betriebliche-Gesundheitsförderung',type:'erwachsen'},
-    {name:'Impfung',type:'kind'},
-    {name:'Zahnvorsorge',type:'kind'},
-    {name:'u-/J-Untersuchungen',type:'kind'},
-    {name:'Private Vorsorge',type:'kind'},
-    {name:'Zusatzversicherung',type:'kind'},
-    {name:'Prävention',type:'kind'},
-    {name:'Sportaktivitäten',type:'kind'},
-    {name:'Babyschwimmen',type:'kind'},
-  ];
-
-  length:number = this.question.length;
+  length:number = question.length;
   constructor(private time:TimeServiceService)
   {
     this.time.getData().subscribe(data=>{
@@ -147,7 +75,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.questionInit();
-    for (let i = 0; i < this.question.length; i++) {
+    for (let i = 0; i < question.length; i++) {
   }
 }
 
@@ -156,15 +84,16 @@ export class AppComponent implements OnInit{
   }
   
   getcondition(){
-return this.condition
+return condition
   }
   
   
 
   async questionInit() {
+    console.log(condition)
           sessionStorage.clear();
-          for (let i = 0; i < this.question.length; i++) {
-            if (this.question[i].type === 'boolean') {
+          for (let i = 0; i < question.length; i++) {
+            if (question[i].type === 'boolean') {
               const myElement = document.createElement('div');
               const myContainer = document.getElementById('test');
         
@@ -176,7 +105,7 @@ return this.condition
               myElement.textContent = 'Hello, World!';
               myElement.innerHTML = `
               <div id="boolean${i}">
-              <label>${this.question[i].info}</label>
+              <label>${question[i].info}</label>
                 <div id="wrapper">
                   <form>
                     <div class="input-wrapper">
@@ -184,8 +113,8 @@ return this.condition
                         <input id="input-single-${i}" autocomplete="off" type="button" class="dropdown-button wide"/>
                         <div style="display:none;" class="overlay"></div>
                         <div id="singleItem-${i}" class="dropdown-content" style="display:none;">
-                          ${this.questionoption
-                            .filter((option) => option.questionid === this.question[i].questionid)
+                          ${questionoption
+                            .filter((option) => option.questionid === question[i].questionid)
                             .map((option, index) => `<p class="select-option" id="boolean-option-${i}-${index}">${option.name}</p>`)
                             .join('')}
                         </div>
@@ -201,7 +130,7 @@ return this.condition
               this.render(myElement, myElement);}
 
 
-        if (this.question[i].type === 'select') {
+        if (question[i].type === 'select') {
           const myElement = document.createElement('div');
           const myContainer = document.getElementById('test');
     
@@ -212,8 +141,8 @@ return this.condition
           myElement.classList.add('selectMultiple'+ i);
           myElement.textContent = 'Hello, World!';
           myElement.innerHTML = `
-          <div id="select${i}" style="display:${this.question[i].visible === 'no' ? 'none' : 'block'}">
-          <label>${this.question[i].info}</label>
+          <div id="select${i}" style="display:${question[i].visible === 'no' ? 'none' : 'block'}">
+          <label>${question[i].info}</label>
           <div id="wrapper" >
             <form>
               <div class="input-wrapper">
@@ -222,8 +151,8 @@ return this.condition
                   <div style="display:none;" class="overlay"></div>
                   <div id="multipleItem-${i}" class="dropdown-content" style="display:${this.clicked ? 'block' : 'none'};
                     z-index: 9999;">
-                    ${this.questionoption
-                      .filter((option) => option.questionid === this.question[i].questionid)
+                    ${questionoption
+                      .filter((option) => option.questionid === question[i].questionid)
                       .map((option, index) => `<p id="select-option-${i}-${index}" class="select-option-multi${i}" style="display:${option.visible === 'no' ? 'none' : 'block'}">${option.name}</p>`)
                       .join('')}
                   </div>
@@ -236,7 +165,7 @@ return this.condition
           `;
           this.render(myElement, myElement);}
 
-      if (this.question[i].type === 'date') {
+      if (question[i].type === 'date') {
             const myElement = document.createElement('div');
             const myContainer = document.getElementById('test');
       
@@ -248,12 +177,12 @@ return this.condition
             myElement.textContent = 'Hello, World!';
             myElement.innerHTML = `
             <div id='date${i}'>
-            <label>${this.question[i].info}</label>
+            <label>${question[i].info}</label>
             <input type="date" id="dateinput${i}" "/> <br/><br/></div>
             `;
             this.render(myElement, myElement);}
       
-      if (this.question[i].type === 'text') {
+      if (question[i].type === 'text') {
             const myElement = document.createElement('div');
             const myContainer = document.getElementById('test');
 
@@ -264,8 +193,8 @@ return this.condition
             myElement.classList.add('textfield'+ i);
             myElement.textContent = 'Hello, World!';
             myElement.innerHTML = `
-            <form id="text${i}" style="display:${this.question[i].visible === 'no' ? 'none' : 'block'}">
-            <label>${this.question[i].info}</label>
+            <form id="text${i}" style="display:${question[i].visible === 'no' ? 'none' : 'block'}">
+            <label>${question[i].info}</label>
              <div
                id="textInput" 
                class="inputForm"
@@ -277,20 +206,20 @@ return this.condition
                      autocomplete="off"
                      class="dropdown-button wide"
                      name="input"
-                     placeholder="${this.question[i].placeholder}"
+                     placeholder="${question[i].placeholder}"
                    />
                  </div>
                  <span class="inputType"><i class="fa fa-pencil input-icon"></i></span>
                </div>
                <p id="validtext${i}" style="color:red"></p>
                <p class="mat-hint-is-p">
-               ${this.question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
+               ${question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
                </p><br/><br/>
              </div>
            </form> `;
             this.render(myElement, myElement);}
 
-      if (this.question[i].type === 'textarea') {
+      if (question[i].type === 'textarea') {
               const myElement = document.createElement('div');
               const myContainer = document.getElementById('test');
   
@@ -305,7 +234,7 @@ return this.condition
             <div
               id="textareaInput"
               class="inputForm"
-            >${this.question[i].info}
+            >${question[i].info}
               <div class="input-wrapper">
                 <div class="inputField">
                   <textarea
@@ -321,13 +250,13 @@ return this.condition
                 </div>
               </div>
               <p class="mat-hint-is-p">
-              ${this.question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
+              ${question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
               </p><br/>
             </div>
           </form>`;
               this.render(myElement, myElement);}
 
-      if (this.question[i].type === 'upload') {
+      if (question[i].type === 'upload') {
           const myElement = document.createElement('div');
           const myContainer = document.getElementById('test');
           console.log('input')
@@ -361,13 +290,13 @@ return this.condition
               <span class="inputType"><i class="fa fa-upload input-icon"></i></span>
             </div>
             <p class="mat-hint-is-p">
-            ${this.question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
+            ${question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
             </p>
           </div>
         </form>`;
           this.render(myElement, myElement);}
 
-      if (this.question[i].type === 'multiupload') {
+      if (question[i].type === 'multiupload') {
             const myElement = document.createElement('div');
             const myContainer = document.getElementById('test');
             console.log('input')
@@ -391,7 +320,7 @@ return this.condition
                     class="dropdown-button wide"
                     id="fileUpload"
                     (change)="
-                      onFileInput($event);
+                    onFileInput($event);
                       
                       "
                     
@@ -409,7 +338,7 @@ return this.condition
               </div>
       
               <p class="mat-hint-is-p">
-              ${this.question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
+              ${question[i].pflicht ==='j' ? 'Pflichtfeld' : 'Freiwillige Angabe'}
               </p>
       
               <div
@@ -447,17 +376,17 @@ return this.condition
             this.render(myElement, myElement);}
 
 
-  if(this.question[i].type === 'boolean'){
+  if(question[i].type === 'boolean'){
               console.log('success1')
     this.validateBoolean(i)
   }
-  if (this.question[i].type === 'select') {
+  if (question[i].type === 'select') {
     this.validatemultiselect(i)
   }
-    if(this.question[i].type === 'date'){
+    if(question[i].type === 'date'){
       this.validateDate(i)
     }
-    if(this.question[i].type === 'text'){
+    if(question[i].type === 'text'){
     this.validateText(i)
     }
 
@@ -468,7 +397,7 @@ validateBoolean(i:number){
   const inputElement = document.getElementById(`input-single-${i}`) as HTMLInputElement;
   const singleItemElement = document.getElementById(`singleItem-${i}`) as HTMLElement;
   const wholeElement = document.getElementById(`boolean${i}`) as HTMLElement
-  if (this.question[i].visible === 'no'){
+  if (question[i].visible === 'no'){
     wholeElement.style.display = 'none';
   }else{wholeElement.style.display = 'block'}
   const inputValue = inputElement.value;
@@ -508,7 +437,7 @@ validateBoolean(i:number){
           const newAnswersingle = {
             id: `${i}`,
             value: selectedOption.innerText.trim(),
-            question: this.question[i].name
+            question: question[i].name
           };        
           
           this.answerssingle.push(newAnswersingle);
@@ -520,8 +449,8 @@ validateBoolean(i:number){
           const newAnswer = {
             id: `${i}`,
             value: selectedOption.innerText.trim(),
-            question: this.question[i].name,
-            questionid: this.question[i].questionid,
+            question: question[i].name,
+            questionid: question[i].questionid,
           };
           
           this.answerssingle.push(newAnswer);
@@ -596,8 +525,8 @@ validatemultiselect(i:number){
             const newAnswer = {
               id: `${i}`, 
               value: selectedOptionmulti.innerText.trim(),
-              question: this.question[i].name,
-              questionid: this.question[i].questionid,
+              question: question[i].name,
+              questionid: question[i].questionid,
             };
             
             this.answersmulti.push(newAnswer);
@@ -637,7 +566,7 @@ validateDate(i: number) {
           var test = geburtsdatum.value.split("-", 4);
           var date = this.newdata.formatted.split("-", 4);
           var minimumyear = date[0] - 16;
-          var minimumdate = `${minimumyear}-${date[1]}-${date[2]}`;
+          var minimumdate = `${minimumyear}-${date[1]}-${date[2 ]}`;
           var minimumdateformatted = minimumdate.split(" ", 2);
           console.log(minimumdateformatted[0]);
           this.geburtsdatum = test[0];
@@ -656,8 +585,8 @@ validateDate(i: number) {
           const newAnswerdate = {
             id: `${i}`,
             value: geburtsdatum.value,
-            question: this.question[i].name,
-            questionid: this.question[i].questionid,
+            question: question[i].name,
+            questionid: question[i].questionid,
             age: alter
           };
   
@@ -705,7 +634,7 @@ validateText(i:number){
         {console.log(target)
         const text = target.value;
         {console.log(text)
-        const regexapi = this.question[i].regex
+        const regexapi = question[i].regex
         console.log(regexapi)
         const regex:RegExp = new RegExp(regexapi); //vor und nachname
         console.log(regex)
@@ -716,8 +645,8 @@ validateText(i:number){
             const newAnswertext = {
               id: `${i}`, 
               value: inputElementText.value.trim(),
-              question: this.question[i].name,
-              questionid: this.question[i].questionid,
+              question: question[i].name,
+              questionid: question[i].questionid,
             };
             
             this.answerstext.push(newAnswertext);
@@ -734,183 +663,198 @@ validateText(i:number){
      }
     }
   })
-  }  
+  }
 
   evaluateExpression(expression: string) {
     // Verwendung von eval mit this
     const result = eval(expression);
     return result;
   }
+  
 async checkCondition(){
 
-  for (let i = 0; i < this.question.length; i++) {
-    var x = this.question[i].questionid
+  for (let i = 0; i < question.length; i++) {
+    var x = question[i].questionid
     
 
-    if (this.question[i].condition === 'yes') {
+    if (question[i].condition === 'yes') {
       var test = this.getcondition();
 
-        for (let p = 0; p < test.length; p++) {
-          if(test[p].type === 'question'){
+      for (let p = 0; p < test.length; p++) {
+        if(test[p].type === 'question'){
           if (x === test[p].questionid){
-          var self = this;
-          var variable1 = 'self.'+test[p].variable;
-           console.log('after = question id')
-          if(eval(variable1)){for(let s = 0; s < eval(variable1).length; s++){console.log(s)
-
-            
-            var formattedCondition = 'self.'+test[p].variable+'['+`${s}`+']'+ test[p].value;
-          var variable = 'self.'+test[p].variable+'['+`${s}`+']';
-          
-
-          console.log(this.answersmulti)
-          console.log(this.answersmultivalue)
-          console.log(eval(variable))       
-          console.log(formattedCondition)
-          console.log(eval(variable1))
-          if(eval(variable)){console.log(eval(variable))
-          console.log(eval(formattedCondition));
-          
-          if (eval(formattedCondition)) {
-            for(let q = 0; q < this.question.length; q++){
-
-              if(this.question[q].name === test[p].questionactivate){
-                var number = this.question[q].questionid; 
-                var fieldtype = this.question[q].type
-                var element = document.getElementById(`${fieldtype+number}`)
-                if(element){
-                  element.style.display = 'block';
-                }else{console.log('process ended but failed, found no element')}
-              }else{console.log('process ended but failed, question name doesnt fit', this.question[q].name)}
-            }
-
-           
-
-            console.log('process ended')
-      
-          }else{
-            for(let q = 0; q < this.question.length; q++){
-              if(this.question[q].name === test[p].questionactivate){
-                var number = this.question[q].questionid; console.log(number);
-                var fieldtype = this.question[q].type
-                var element = document.getElementById(`${fieldtype+number}`)
-                if(element){
-                  element.style.display = 'none';
+              var self = this;
+              var variable1 = 'self.'+test[p].variable;
+              var filteredanswers: { id: string; value: string; question: string; questionid: number}[] = [];
+                console.log(x)
+            eval(variable1)
+              .filter((filter:any) => filter.questionid === test[p].baseid)
+              .forEach((filter:any) => {
+                filteredanswers.push(filter)
+              });
+            if(eval(variable1)){
+              for(let s = 0; s < filteredanswers.length; s++){console.log(s)
+                    console.log(`process ran the ${s} time`)
+                    console.log(filteredanswers)
+                  var formattedCondition = 'self.'+test[p].variable+'['+`${s}`+']'+ test[p].value;
+                  var variable = 'self.'+test[p].variable+'['+`${s}`+']';
+                
+                    console.log(this.answersmulti)
+                    console.log(this.answersmultivalue)
+                    console.log(eval(variable))       
+                    console.log(formattedCondition)
+                    console.log(eval(variable1))
+                if(eval(variable)){console.log(eval(variable))
+                    console.log(eval(formattedCondition));      
+                  if (eval(formattedCondition)) {
+                    for(let q = 0; q < question.length; q++){
+                      if(question[q].name === test[p].questionactivate){
+                          var number = question[q].questionid; 
+                          var fieldtype = question[q].type
+                          var element = document.getElementById(`${fieldtype+number}`)
+                        if(element){
+                            element.style.display = 'block';
+                          }else{console.log('process ended but failed, found no element')}
+                      }else{
+                        console.log('process ended but failed, question name doesnt fit', question[q].name)
+                      }
+                    }
+                    console.log('process ended')
+                  }else{
+                    for(let q = 0; q < question.length; q++){
+                      if(question[q].name === test[p].questionactivate){
+                        var number = question[q].questionid; console.log(number);
+                        var fieldtype = question[q].type
+                        var element = document.getElementById(`${fieldtype+number}`)
+                        if(element){
+                            element.style.display = 'none';
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
           }
         }
-
-        }
-      }}}
-      }}else{console.log('couldnt find a condition',i);}
-    
-  
-  for (let o = 0; o < this.questionoption.length; o++){
-    
-    }
+      }
+    }else{console.log('couldnt find a condition',i);}
   }
 
-  for (let i = 0; i < this.condition.length; i++) {
-    
-    console.log(i)
-    var test = this.getcondition();
-    
-  for(let p = 0; p < test.length; p++){console.log(p)
-    if(test[p].type === 'option'){
+  for (let i = 0; i < condition.length; i++) {
+      console.log(i)
+      var test = this.getcondition();
+    for(let p = 0; p < test.length; p++){console.log(p)
+      if(test[p].type === 'option'){
+          var variable1 = 'self.'+test[p].variable;
+          var filteredanswers: { id: string; value: string; question: string; questionid: number}[] = [];
+          eval(variable1)
+            .filter((filter:any) => filter.questionid === test[p].baseid)
+            .forEach((filter:any) => {
+              filteredanswers.push(filter)
+              console.log(filter)
+            });
+          var self = this;
+        if(eval(variable1)){
+          for(let s = 0; s < filteredanswers.length; s++){
+                console.log(s)
+              var formattedCondition = 'self.'+test[p].variable+'['+`${s}`+']'+ test[p].value;
+              var variable = 'self.'+test[p].variable+'['+`${s}`+']'
+            if(eval(variable)){console.log(eval(variable))
 
-      
-  var self = this;
+              if (eval(formattedCondition)) {
+                    console.log('bedingung trifft zu');
+                  var options: { name: string; pflicht: string; prio: number; questionid: number; visible: string; }[] = [];
+                  var questionid = test[p].questionid;
 
-    var formattedCondition = 'self.'+test[p].variable+'['+`${0}`+']'+ test[p].value;
-    var variable = 'self.'+test[p].variable+'['+`${0}`+']'
-    if(eval(variable)){console.log(eval(variable))
-
-    if (eval(formattedCondition)) {
-      console.log('bedingung trifft zu');            
-
-var options: { name: string; pflicht: string; prio: number; questionid: number; visible: string; }[] = [];
-var questionid = test[p].questionid;
-
-this.questionoption
-  .filter((option) => option.questionid === questionid)
-  .forEach((option, index) => {
-    options.push(option)
-  });
-
-    if(options){
-      for(let q = 0; q < options.length; q++){
-        var type:string='';
+                  questionoption
+                    .filter((option) => option.questionid === questionid)
+                    .forEach((option, index) => {
+                      options.push(option)
+                    });
+                    console.log(options)
+                if(options){
+                  for(let q = 0; q < options.length; q++){
+                      var type:string='';
         
 
-        if(this.questionoption[q].name === test[p].optionactivate && this.questionoption[q].questionid === test[p].questionid){console.log('fit!!!!!!')
-          for(let o = 0; o < this.question.length; o++){if(this.question[o].questionid=== questionid){var type = this.question[o].type;} }
-          var number:number = 0;
+                    if(options[q].name === test[p].optionactivate && options[q].questionid === test[p].questionid){console.log('fit!!!!!!')
+                      for(let o = 0; o < question.length; o++){if(question[o].questionid=== questionid){var type = question[o].type;} }console.log(type)
+                          var number:number = 0;
           
-          this.questionoption
-              .filter((option) => option.questionid === questionid)  
-              .forEach((option, index) => {
-                if(option.name === this.questionoption[q].name){
-                  number=index
+                          questionoption
+                            .filter((option) => option.questionid === questionid)  
+                            .forEach((option, index) => {console.log(option)
+                              if(option.name === test[q].optionactivate){
+                                  number=index
+                                  console.log(number)
+                                }else{console.log('index')}
+                            })
+
+                          var questionidoption = options[q].questionid; 
+                          var optionname = questionoption[q].name;
+                            console.log(`${type+'-option-'+questionidoption+'-'+number}`)
+                          var element = document.getElementById(`${type+'-option-'+questionidoption+'-'+number}`)
+                            console.log(element)
+                          var isconditionright = true;
+                        if(element){
+                          this.showelements(element,formattedCondition);}
+                            console.log(this.answersmultivalue)
+                    }else{console.log('process ended but failed, questionoption name doesnt fit', options[q].name)}
+                  }
+                    console.log(i)
+                    console.log('process ended')
+
                 }
-              })
-          
-          var questionid = this.questionoption[q].questionid; 
-          var optionname = this.questionoption[q].name;
+              }else{
+                  var options: { name: string; pflicht: string; prio: number; questionid: number; visible: string; }[] = [];
+                  var questionid = test[p].questionid;
 
-          var element = document.getElementById(`${type+'-option-'+questionid+'-'+number}`)
-          if(element){
-            element.style.display = 'block';
-          }else{console.log('process ended but failed, found no element')}
-        }else{console.log('process ended but failed, questionoption name doesnt fit', this.questionoption[q].name)}
-      }
+                  questionoption
+                    .filter((option) => option.questionid === questionid)
+                    .forEach((option, index) => {
+                      options.push(option)
+                  });
 
-     
-     console.log(i)
-      console.log('process ended')
-
-  }
-    }else{
-  var options: { name: string; pflicht: string; prio: number; questionid: number; visible: string; }[] = [];
-  var questionid = test[p].questionid;
-
-  this.questionoption
-    .filter((option) => option.questionid === questionid)
-    .forEach((option, index) => {
-      options.push(option)
-  });
-
-    if(options){
-      for(let q = 0; q < options.length; q++){
-        var type:string='';
+                if(options){
+                  for(let q = 0; q < options.length; q++){
+                      var type:string='';
         
-        if(this.questionoption[q].name === test[p].optionactivate && this.questionoption[q].questionid === test[p].questionid){console.log('fit!!!!!! but in else')
-          for(let o = 0; o < this.question.length; o++){if(this.question[o].questionid=== questionid){console.log(this.question[o].type);var type = this.question[o].type;} }
-          var number:number = 0;
+                    if(options[q].name === test[p].optionactivate && options[q].questionid === test[p].questionid){console.log('fit!!!!!! but in else')
+                      for(let o = 0; o < question.length; o++){if(question[o].questionid=== questionid){console.log(question[o].type);var type = question[o].type;} }
+                          var number:number = 0;
+                            console.log('yes')
+                          questionoption
+                            .filter((option) => option.questionid === questionid)  
+                            .forEach((option, index) => {
+                              if(option.name === options[q].name){;number=index}console.log(number)
+                              // number =+ index
+                            })
           
-          this.questionoption
-              .filter((option) => option.questionid === questionid)  
-              .forEach((option, index) => {
-                if(option.name === this.questionoption[q].name){console.log('success');number=index}
-                // number =+ index
-                })
-          
-          var questionid = this.questionoption[q].questionid; 
-          var optionname = this.questionoption[q].name
-          var element = document.getElementById(`${type+'-option-'+questionid+'-'+number}`)
-          if(element){
-              element.style.display = 'none';
+                          var questionid = options[q].questionid; 
+                          var optionname = questionoption[q].name
+                          var element = document.getElementById(`${type+'-option-'+questionid+'-'+number}`)
+                            console.log(element)
+                        if(element){
+                          element.style.display = 'none';
+                        }
+        
+                    }else{
+                      console.log('failed')
+                    }
+                  }
+                }
+              }
+            } 
           }
-        
-        }else{console.log('failed')}}
+        }
       }
     }
-  }
-  
-  }
-  }
+  } 
 }
+
+showelements(element:HTMLElement,condition:string){
+  element.style.display = 'block';
 }
 
 returnquestion(){
@@ -931,7 +875,7 @@ returnquestion(){
 
 getallquestionoptions(i:number){
   const test = []
-  for(let o = 0; o < this.questionoption.length; o++){if(this.questionoption[o].questionid === i) {test.push(this.questionoption[o])}}
+  for(let o = 0; o < questionoption.length; o++){if(questionoption[o].questionid === i) {test.push(questionoption[o])}}
   return test
 }
 

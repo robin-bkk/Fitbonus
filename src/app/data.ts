@@ -1,0 +1,73 @@
+export const condition:{type:string,baseid:number,questionid:number,questionactivate:string,optionactivate:string, value:string,variable:string}[]=[
+    {type:'question',baseid:3,questionid:4 , questionactivate: 'Maßnahmen',optionactivate:'', value:'.age > 16', variable:'answersdate'},
+    {type:'question',baseid:3,questionid:5 , questionactivate: 'Maßnahmen-kind',optionactivate:'', value:'.age < 16', variable:'answersdate'},
+    {type:'question',baseid:0,questionid:1 , questionactivate: 'Kind',optionactivate:'', value:'.value.includes("Für mein kind")', variable:'answerssingle'},
+    {type:'question',baseid:5,questionid:6 , questionactivate: 'Maßnahmen-kind1',optionactivate:'', value:'.value.includes("test4")', variable:'answersmulti'},
+  ];
+
+  export const question: {questionid:number, name:string, info:string, type: string, options:string, pflicht:string, minage:number,visible:string;validation:string;regex:string;placeholder:string;condition:string}[]=[
+    {questionid: 0,name: 'Person',info: 'Für wen ist der Antrag?', type: 'boolean',options:'j', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',placeholder:'',condition:'no'},
+    {questionid: 1,name: 'Kind',info: 'Bitte hier den Namen des Kindes eintragen.', type: 'text',options:'n', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'^[\\w\\DüöäßÜÄÖ-]{2,20}(\\s|,\\s?)[\\w\\DüöäÜÖÄß-]{2,20}',placeholder:'Nachname, Vorname',condition:'yes'},
+    {questionid: 2,name: 'Geschlecht',info:'Bitte wählen Sie Ihr Geschlecht aus:', type:'boolean', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 3,name: 'Geburtsdatum',info:'Bitte geben Sie hier Ihr Geburtsdatum ein:', type:'date', options:'n', pflicht:'j', minage: 0, visible:'yes',validation:'n',regex:'',placeholder:'',condition:'no'},
+    {questionid: 4,name: 'Maßnahmen',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 16, visible:'no',validation:'n',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 5,name: 'Maßnahmen-kind',info:'Bitte wählen Sie Ihre Maßnahmen aus:', type:'select', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',placeholder:'',condition:'yes'},
+    {questionid: 6,name: 'Maßnahmen-kind1',info:'test', type:'text', options:'j', pflicht:'j', minage: 0, visible:'no',validation:'j',regex:'',placeholder:'',condition:'yes'}
+];
+
+  export const questionoption: {name:string, pflicht:string, prio:number, questionid:number, visible:string}[]=[
+    {name: 'Betriebliche-Gesundheitsförderung', pflicht:'j', prio:1,questionid:6, visible: 'no'},
+    {name: 'Für mich', pflicht:'j', prio: 1, questionid:0, visible: 'yes'},
+    {name: 'Für mein kind', pflicht:'j', prio: 2, questionid: 0, visible: 'yes'},
+    {name: 'test1', pflicht:'j', prio:1,questionid:1, visible: 'yes'},
+    {name: 'test2', pflicht:'j', prio:1,questionid:1, visible: 'yes'},
+    {name: 'test2', pflicht:'j', prio:1,questionid:6, visible: 'yes'},
+    {name: 'test3', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'test4', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'test5', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'test6', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Impfung', pflicht:'j', prio:1,questionid:4, visible: 'no'},
+    {name: 'Impfung', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Krebsvorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Vorsorge-Schwangere', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Vorsorge-Schwangere', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Zahnvorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Zahnvorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Checkup35', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Checkup35', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Private-Vorsorge', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Private-Vorsorge', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Zusatzversicherung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Zusatzversicherung', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Prävention', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Prävention', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'BMI', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'BMI', pflicht:'j', prio:1,questionid:5, visible: 'yes'},
+    {name: 'Nichtraucher', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+    {name: 'Nichtraucher', pflicht:'j', prio:5,questionid:4, visible: 'yes'},
+    {name: 'Betriebliche-Gesundheitsförderung', pflicht:'j', prio:1,questionid:4, visible: 'yes'},
+  
+  ];
+
+  export const bonus: {name:string, type:string,}[]=[
+    {name:'Impfung',type:'erwachsen'},
+    {name:'Krebsvorsorge',type:'erwachsen'},
+    {name:'Vorsorge-Schwangere',type:'erwachsen'},
+    {name:'Zahnvorsorge',type:'erwachsen'},
+    {name:'Checkup35',type:'erwachsen'},
+    {name:'Private-Vorsorge',type:'erwachsen'},
+    {name:'Zusatzversicherung',type:'erwachsen'},
+    {name:'Prävention',type:'erwachsen'},
+    {name:'BMI',type:'erwachsen'},
+    {name:'Nichtraucher',type:'erwachsen'},
+    {name:'Betriebliche-Gesundheitsförderung',type:'erwachsen'},
+    {name:'Impfung',type:'kind'},
+    {name:'Zahnvorsorge',type:'kind'},
+    {name:'u-/J-Untersuchungen',type:'kind'},
+    {name:'Private Vorsorge',type:'kind'},
+    {name:'Zusatzversicherung',type:'kind'},
+    {name:'Prävention',type:'kind'},
+    {name:'Sportaktivitäten',type:'kind'},
+    {name:'Babyschwimmen',type:'kind'},
+  ];
