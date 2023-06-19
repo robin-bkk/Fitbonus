@@ -756,7 +756,7 @@ async checkCondition(){
           var self = this;
           var variable1 = 'self.'+test[p].variable;
            console.log('after = question id')
-          if(eval(variable1)){for(let s = -1; s < eval(variable1).length; s++){console.log(s)
+          if(eval(variable1)){for(let s = 0; s < eval(variable1).length; s++){console.log(s)
 
             
             var formattedCondition = 'self.'+test[p].variable+'['+`${s}`+']'+ test[p].value;
