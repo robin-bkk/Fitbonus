@@ -437,7 +437,8 @@ validateBoolean(i:number){
           const newAnswersingle = {
             id: `${i}`,
             value: selectedOption.innerText.trim(),
-            question: question[i].name
+            question: question[i].name,
+            questionid: question[i].questionid
           };        
           
           this.answerssingle.push(newAnswersingle);
@@ -679,8 +680,9 @@ async checkCondition(){
 
     if (question[i].condition === 'yes') {
       var test = this.getcondition();
-
+      // console.log(question[i])
       for (let p = 0; p < test.length; p++) {
+        // console.log(test[p])
         if(test[p].type === 'question'){
           if (x === test[p].questionid){
               var self = this;
@@ -692,6 +694,7 @@ async checkCondition(){
               .forEach((filter:any) => {
                 filteredanswers.push(filter)
               });
+              console.log(filteredanswers)
             if(eval(variable1)){
               for(let s = 0; s < filteredanswers.length; s++){console.log(s)
                     console.log(`process ran the ${s} time`)
